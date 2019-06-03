@@ -8,6 +8,11 @@
   <artifactId>taotao-web</artifactId>
   <packaging>war</packaging>
   <dependencies>
+		  <dependency>
+		  <groupId>junjunlei.com</groupId>
+		  <artifactId>taotao-content-interface</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		  </dependency>
 		<!-- manager-interface接口 -->
 		<dependency>
 			<groupId>junjunlei.com</groupId>

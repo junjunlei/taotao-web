@@ -20,7 +20,9 @@
 	<dubbo:application name="taotao-web"/>
 	<dubbo:registry group="dubbo" address="47.93.32.124:2181" protocol="zookeeper"/>
 	<dubbo:reference interface="com.taotao.service.TestService" id="testService" timeout="300000"/>	
-	<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"  timeout="300000" />							
+	<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"  timeout="300000" />	
+	<dubbo:reference interface="com.taotao.content.service.ContentCategoryService" id="contentCategoryService"  timeout="300000"/>											
+	<dubbo:reference interface="com.taotao.content.service.ContentService" id="contentService" timeout="300000"/>
 	<!-- 静态资源映射  指定不被拦截 -->
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>

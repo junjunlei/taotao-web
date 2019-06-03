@@ -29,9 +29,13 @@ $(function(){
 	var tree = $("#contentCategoryTree");
 	var datagrid = $("#contentList");
 	tree.tree({
+		//点击树节点的时候触发
 		onClick : function(node){
+			//判断是否为叶子节点
 			if(tree.tree("isLeaf",node.target)){
+				//加载表格数据  发送请求
 				datagrid.datagrid('reload', {
+					//参数
 					categoryId :node.id
 		        });
 			}

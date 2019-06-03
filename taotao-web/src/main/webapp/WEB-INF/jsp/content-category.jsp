@@ -14,11 +14,15 @@ $(function(){
 		url : '/content/category/list',
 		animate: true,
 		method : "GET",
+		//右击鼠标触发
 		onContextMenu: function(e,node){
+			//关闭原来的鼠标右击事件
             e.preventDefault();
+			//右击鼠标选中的节点
             $(this).tree('select',node.target);
+			//展示菜单
             $('#contentCategoryMenu').menu('show',{
-                left: e.pageX,
+                left: e.pageX,//在鼠标位置显示
                 top: e.pageY
             });
         },
@@ -43,14 +47,16 @@ $(function(){
 	});
 });
 function menuHandler(item){
+	//获取树
 	var tree = $("#contentCategory");
+	//获取被选中的节点
 	var node = tree.tree("getSelected");
 	if(item.name === "add"){
 		tree.tree('append', {
-            parent: (node?node.target:null),
+            parent: (node?node.target:null),//被添加的子节点的父节点
             data: [{
                 text: '新建分类',
-                id : 0,
+                id : 0,//默认id为0
                 parentId : node.id
             }]
         }); 
@@ -61,8 +67,13 @@ function menuHandler(item){
 	}else if(item.name === "delete"){
 		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
 			if(r){
-				$.post("/content/category/delete/",{id:node.id},function(){
-					tree.tree("remove",node.target);
+				$.post("/content/category/delete",{id:node.id},function(data){
+					if(data.status == 200){
+						tree.tree("remove",node.target);	
+					}if(data.status == 201){
+						$.messager.confirm('提示','父菜单不能删除','info');
+					}
+					
 				});	
 			}
 		});
